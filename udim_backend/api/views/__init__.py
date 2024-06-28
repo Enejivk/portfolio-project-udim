@@ -85,5 +85,4 @@ def handle_marshmallow_error(e):
     return make_response(jsonify({"error": e.messages}), 400)
 
 from api.views.user import *
-from api.views.google_auth import *
 from api.views.auth import *
