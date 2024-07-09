@@ -25,14 +25,14 @@ const App = () => {
                     <Route path="/login" element={<LoginForm />} />
 
                     {/* PROTECT ROUTE */}
-                    <Route element={<RequireAuth />} >
+                    {/* <Route element={<RequireAuth />} > */}
                         <Route path="/home" element={<Overview />} />
                         <Route path="/finances" element={<Finances />} />
                         <Route path="/profile" element={<Profile />} />
                         <Route path="/logout" element={<Logout />} />
                         <Route path="/debtors" element={<Debtors />} />
                     </Route>
-                </Route>
+                {/* </Route> */}
             </Routes>
         </Suspense >
     );
