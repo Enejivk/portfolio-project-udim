@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Layout from './form/Authentication/Layout'
-import RequireAuth from './form/Authentication/RequireAuth'
+import Layout from './form/Authentication/Layout';
+import RequireAuth from './form/Authentication/RequireAuth';
 
 const LandingPage = lazy(() => import('./landingPage/index'));
 const Register = lazy(() => import('./form/register/Register'));

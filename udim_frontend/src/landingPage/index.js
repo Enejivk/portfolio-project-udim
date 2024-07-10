@@ -1,13 +1,13 @@
-import  Header  from './header/Header'
-import  Hero  from './hero/Hero'
-import  About  from './about/About'
-import  CTA  from './cta/CTA'
-import  Benefits  from './benefits/Benefits'
-import  Feature  from './features/Feature'
-import  Footer  from './footer/Footer'
+/** @format */
+
+import Header from './header/Header'
+import Hero from './hero/Hero'
+import About from './about/About'
+import CTA from './cta/CTA'
+import Benefits from './benefits/Benefits'
+import Feature from './features/Feature'
+import Footer from './footer/Footer'
 import {Helmet} from 'react-helmet'
-
-
 
 const LandingPage = () => {
     return (
