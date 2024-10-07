@@ -1,31 +1,5 @@
-/** @format */
-
-
-.home-container {
-    display: grid;
-    grid-template-columns: minmax(150px, 250px) minmax(400px, auto) minmax(150px, 250px);
-    grid-template-rows: 64px auto;
-    background-color: var(--grey-color);
-    height: 640px;
-    overflow: hidden;
-}
-
-@media screen and (max-width: 1299px) {
-    .home-container {
-        grid-template-columns: 0 minmax(400px, auto);
-        height: auto;
-    }
-}
-@media screen and (max-width: 1299px) {
-    .home-container {
-        grid-template-columns: 0 minmax(400px, auto);
-        grid-template-rows: 64px auto;        
-    }
-    .home-side-bar{
-        opacity: 0;
-    }
-    .home-main-content{
-        grid-column: 1/4;
-        grid-row: 2/4;
-    }
+@media (max-width: 480px) {
+  .toggle {
+    z-index: 10001;
+  }
 }

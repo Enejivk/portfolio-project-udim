@@ -150,7 +150,7 @@ const LoginForm = () => {
                         </div>
                         {errors.password && <div className="error">{errors.password}</div>}
                     </div>
-                    <button type="submit">Sign Up</button>
+                    <button type="submit">Sign in</button>
 
                     <div className="third_party_sign">
                         <div className="auth-icon-container">

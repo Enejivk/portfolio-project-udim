@@ -59,7 +59,6 @@ const Header = () => {
             </div>
 
             {/* NAV BAR FOR TABLE AND MOBILE SCREEN */}
-
             <div className="menu-link-small-screen">
                 <FiAlignJustify fontSize={37} onClick={() => { setToggleMenu(!toggleMenu) }} />
 

@@ -1,19 +1,23 @@
+import Navigation from '../components/navigation/Navigation';
+import Main from '../components/Main';
+import { ContextWrapper } from '../ContextWrapper';
+import './Overview.css';
+import CardBox from '../components/cardBox/CardBox';
+import Details from '../components/details/Details';
 
-import Sidebar from '../component/sidebar/Sidebar'
-import Main from '../component/mainContent/Main'
-import Navbar from '../component/navbar/Navbar'
-import LeftSideBar from '../component/LeftSideBar/LeftSideBar'
-import './Overview.css'
 
-const Overview = () => {
+function Overview() {
     return (
-        <main className='home-container'>
-            <Navbar />
-            <Sidebar />
-            <Main />
-            <LeftSideBar />
-        </main>
-    )
+        <ContextWrapper>
+            <div className="container">
+                <Navigation />
+                <Main>
+                    <CardBox />
+                    <Details />
+                </Main>
+            </div>
+        </ContextWrapper>
+    );
 }
 
 export default Overview ;

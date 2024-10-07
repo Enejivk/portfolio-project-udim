@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Layout from './form/Authentication/Layout'
-import RequireAuth from './form/Authentication/RequireAuth'
+import Layout from './form/Authentication/Layout';
+import RequireAuth from './form/Authentication/RequireAuth';
 
 const LandingPage = lazy(() => import('./landingPage/index'));
 const Register = lazy(() => import('./form/register/Register'));
@@ -25,14 +25,14 @@ const App = () => {
                     <Route path="/login" element={<LoginForm />} />
 
                     {/* PROTECT ROUTE */}
-                    <Route element={<RequireAuth />} >
+                    {/* <Route element={<RequireAuth />} > */}
                         <Route path="/home" element={<Overview />} />
                         <Route path="/finances" element={<Finances />} />
                         <Route path="/profile" element={<Profile />} />
                         <Route path="/logout" element={<Logout />} />
                         <Route path="/debtors" element={<Debtors />} />
                     </Route>
-                </Route>
+                {/* </Route> */}
             </Routes>
         </Suspense >
     );
