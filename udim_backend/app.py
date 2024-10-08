@@ -24,7 +24,7 @@ app.config.from_object("config")
 
 db.init_app(app)
 cors.init_app(app, supports_credentials=True, resources={
-              r"/*": {"origins": "http://localhost"}})
+              r"/*": {"origins": "http://localhost:3000"}})
 bcrypt.init_app(app)
 migrate.init_app(app, db)
 ma.init_app(app)

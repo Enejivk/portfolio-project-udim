@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState } from "react";
 import { AiOutlineMail } from "react-icons/ai";
 import { MdOutlineLockPerson } from "react-icons/md";
 import { FiEye } from "react-icons/fi";
@@ -54,7 +54,7 @@ const LoginForm = () => {
             const refresh_token = response.data?.refresh_token;
             const token = response.data?.access_token;
             setAuth({ token, refresh_token });
-            navigate(from, {replace: true});
+            navigate(from, { replace: true });
             setErrors({});
 
 
@@ -109,7 +109,7 @@ const LoginForm = () => {
     };
 
     return (
-        <> 
+        <>
             <Link to='/'>
                 <div className="form-close">
                     <IoMdClose fontSize={35} />
@@ -150,7 +150,7 @@ const LoginForm = () => {
                         </div>
                         {errors.password && <div className="error">{errors.password}</div>}
                     </div>
-                    <button type="submit">Sign Up</button>
+                    <button type="submit">Login</button>
 
                     <div className="third_party_sign">
                         <div className="auth-icon-container">

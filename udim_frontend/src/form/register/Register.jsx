@@ -9,10 +9,12 @@ import { FiEyeOff } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import { GoogleLoginBtn } from '../Authentication/Oauth'
+import { useNavigate } from 'react-router-dom';
 import axios from './Api'
 
 import * as Yup from "yup";
 import '../Form.css';
+
 
 
 const RegistrationForm = () => {
@@ -34,7 +36,8 @@ const RegistrationForm = () => {
 
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-
+    const navigate = useNavigate();
+    
     const validationSchema = Yup.object({
         firstName: Yup.string().required("First Name is required"),
         lastName: Yup.string().required("Last Name is required"),
@@ -72,9 +75,9 @@ const RegistrationForm = () => {
             console.log("Response", response.data);            
             console.log("Form data", formData);
             setErrors({});
+            navigate('/login');
 
-
-        } catch (error) {
+        } catch (error) {    
             // Handle validation errors or Axios request errors
             if (error.response) {
                 // Server responded with an error status (4xx or 5xx)

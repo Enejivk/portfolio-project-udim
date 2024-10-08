@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/enejivik/final/portfolio-project-udim/udim_backend/.venv"
+VIRTUAL_ENV="/home/enejivik/portfolio-project-udim/udim_backend/.venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
