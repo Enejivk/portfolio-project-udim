@@ -8,3 +8,4 @@ api/script
 tests
 api/schema/__pycache__
 __pycache__
+api/google_client.json

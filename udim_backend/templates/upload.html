@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload File</title>
+</head>
+<body>
+    <h1>Upload a File</h1>
+    <form action="/api/upload" method="post" enctype="multipart/form-data">
+        <label for="image">Select an image:</label>
+        <input type="file" id="image" name="image" accept="image/*" required>
+        <button type="submit">Upload</button>
+        <img src="127.0.0.1:5001/api/static/profile_images/skywalker_67_20240627001544.jpg" alt="">
+    </form>/
+</body>
+</html>

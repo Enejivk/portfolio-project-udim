@@ -17,9 +17,9 @@ class User(db.Model):
     email = db.Column(db.String(60), nullable=False, unique=True)
 
     created_group = db.relationship('Group', backref='created_by', lazy=True)
-    contributions = db.relationship('Contribution', backref='user', lazy=True)
-    donations = db.relationship('Donation', backref='user', lazy=True)
-    debts = db.relationship('Debt', backref='user', lazy=True)
+    payments = db.relationship('Payment', backref='user', lazy=True, cascade="all, delete, delete-orphan")
+    donations = db.relationship('Donation', backref='user', lazy=True, cascade="all, delete, delete-orphan")
+    debts = db.relationship('Debt', backref='user', lazy=True, cascade="all, delete, delete-orphan")
     
     def __setattr__(self, name, value):
         """sets a password with bcrypt encryption"""
@@ -43,6 +43,7 @@ group_admin = db.Table('group_admin',
 )
 
 class Group(db.Model):
+    """Representation of a Group """
     __tablename__ = 'groups'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -53,26 +54,28 @@ class Group(db.Model):
 
     members = db.relationship('User', secondary=group_member, lazy='subquery',
         backref=db.backref('groups', lazy=True))
-    donations = db.relationship('Donation', backref='group', lazy=True)
-    debts = db.relationship('Debt', backref='group', lazy=True)
-    contributions = db.relationship('Contribution', backref='group', lazy=True)
+    donations = db.relationship('Donation', backref='group', lazy=True, cascade="all, delete, delete-orphan")
+    debts = db.relationship('Debt', backref='group', lazy=True, cascade="all, delete, delete-orphan")
+    payments = db.relationship('Payment', backref='group', lazy=True, cascade="all, delete, delete-orphan")
     admins = db.relationship('User', secondary=group_admin, lazy='subquery',
         backref=db.backref('admin_groups', lazy=True))
 
 
 class Donation(db.Model):
+    """Representation of a Donation """
     __tablename__ = 'donations'
     
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    amount = db.Column(db.Float, nullable=False)
+    amount = db.Column(db.Float, nullable=True, default=0.0)
     description = db.Column(db.String(1024), nullable=True)
     group_id = db.Column(db.Integer, db.ForeignKey('groups.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    contributions = db.relationship('Contribution', backref='donation', lazy=True)
+    payments = db.relationship('Payment', backref='donation', lazy=True)
 
 class Debt(db.Model):
+    """Representation of a Debt """
     __tablename__ = 'debts'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -84,8 +87,9 @@ class Debt(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
 
-class Contribution(db.Model):
-    __tablename__ = 'contributions'
+class Payment(db.Model):
+    """Representation of a payments """
+    __tablename__ = 'payments'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -98,6 +102,7 @@ class Contribution(db.Model):
     donation_id = db.Column(db.Integer, db.ForeignKey('donations.id'), nullable=False)
 
 class TokenBlocklist(db.Model):
+    """Representation of a token block list """
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     jti = db.Column(db.String(36), nullable=False, unique=True)
     token_type = db.Column(db.String(10), nullable=False)

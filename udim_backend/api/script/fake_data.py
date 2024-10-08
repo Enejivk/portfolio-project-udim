@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from faker import Faker
 from extensions import db
-from api.models.models import User, Group, Donation, Debt, Contribution
+from models.models import User, Group, Donation, Debt, Contribution
 
 fake = Faker()
 
