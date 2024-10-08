@@ -28,6 +28,7 @@ Usage:
 """
 
 from flask import request
+from flask_jwt_extended import jwt_required
 from flask_restful import Resource, abort
 from models.models import Donation
 from api.schema.donation import DonationSchema
@@ -35,6 +36,7 @@ from extensions import db
 
 
 class DonationList(Resource):
+    method_decorators = [jwt_required()]
     def get(self):
         """
         Retrieve a list of all donations.
@@ -65,6 +67,7 @@ class DonationList(Resource):
 
 
 class DonationResource(Resource):
+    method_decorators = [jwt_required()]
     def get(self, donation_id):
         """
         Retrieve a specific donation by ID.

@@ -95,6 +95,3 @@ def upload():
         db.session.rollback()
         print(e)
         return {'error': 'An error occurred while uploading the image'}, 500
-    
-
-

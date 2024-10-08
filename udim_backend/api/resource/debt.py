@@ -29,6 +29,7 @@ Usage:
 """
 
 from flask import request
+from flask_jwt_extended import jwt_required
 from flask_restful import Resource, abort
 from models.models import Debt
 from api.schema.debt import DebtSchema
@@ -36,6 +37,7 @@ from extensions import db
 
 
 class DebtList(Resource):
+    method_decorators = [jwt_required()]
     def get(self):
         """
         Retrieve a list of all debts.
@@ -66,6 +68,7 @@ class DebtList(Resource):
 
 
 class DebtResource(Resource):
+    method_decorators = [jwt_required()]
     def get(self, debt_id):
         """
         Retrieve a specific debt by ID.

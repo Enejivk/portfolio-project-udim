@@ -27,6 +27,7 @@ Usage:
     up the API routes for payment management.
 """
 
+from flask_jwt_extended import jwt_required
 from flask_restful import Resource
 from flask import request
 from models.models import Payment, db
@@ -34,6 +35,7 @@ from api.schema.payment import payment_schema
 
 
 class PaymentResource(Resource):
+    method_decorators = [jwt_required()]
     def get(self, payment_id):
         """
         Retrieve a specific payment by ID.
@@ -86,6 +88,7 @@ class PaymentResource(Resource):
 
 
 class PaymentListResource(Resource):
+    method_decorators = [jwt_required()]
     def get(self):
         """
         Retrieve a list of all payments.
