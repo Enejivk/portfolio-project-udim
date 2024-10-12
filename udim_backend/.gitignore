@@ -9,3 +9,9 @@ tests
 api/schema/__pycache__
 __pycache__
 api/google_client.json
+node_modules
+uploads/*
+test.js
+ujki.PNG
+image.png
+.gitignore

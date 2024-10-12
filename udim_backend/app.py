@@ -21,10 +21,9 @@ from flask import Flask, jsonify, make_response
 
 app = Flask(__name__)
 app.config.from_object("config")
-
+# CORS(app, origins=['http://localhost:3000'])
 db.init_app(app)
-cors.init_app(app, supports_credentials=True, resources={
-              r"/*": {"origins": "http://localhost"}})
+cors.init_app(app)
 bcrypt.init_app(app)
 migrate.init_app(app, db)
 ma.init_app(app)
