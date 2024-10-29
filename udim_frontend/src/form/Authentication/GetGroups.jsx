@@ -39,7 +39,7 @@ const Group = () => {
             {groups?.results?.length
                 ? (
                     <ul>
-                        {groups.results.map((group, i) => <li key={i}>{group.name}</li>)}
+                        {groups.results.map((group) => <li key={group.id}>{group.name}</li>)}
                     </ul>
                 ) : <p>No groups to display</p>
             }

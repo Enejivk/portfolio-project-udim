@@ -12,9 +12,11 @@ class User(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     first_name = db.Column(db.String(60), nullable=False)
     last_name = db.Column(db.String(60), nullable=False)
-    profile_image = db.Column(db.String(20), nullable=False, default='default.jpg')
+    image_url = db.Column(db.String(20), nullable=True)
     password = db.Column(db.String(60), nullable=False)
     email = db.Column(db.String(60), nullable=False, unique=True)
+    phone = db.Column(db.String(15), nullable=True)
+    address = db.Column(db.String(120), nullable=True)
 
     created_group = db.relationship('Group', backref='created_by', lazy=True)
     payments = db.relationship('Payment', backref='user', lazy=True, cascade="all, delete, delete-orphan")
@@ -111,3 +113,4 @@ class TokenBlocklist(db.Model):
     expires = db.Column(db.DateTime, nullable=False)
 
     user = db.relationship("User")
+    

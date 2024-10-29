@@ -3,20 +3,22 @@
 import React from 'react';
 import './LogoutCart.css';
 import LogoutButton from '../../../landingPage/logoutButton/LogoutButton'
-import {userLogin} from '../allIcon'
+// import {userLogin} from '../allIcon'
+import useAuth from '../../../form/Authentication/useAuth';
 
 const LogoutPage = () => {
-    const [toggle, setToggle] = React.useState(false);
-    const toggleEditForm = () => {
-        setToggle(!toggle);
-    };
+    // const [toggle, setToggle] = React.useState(false);
+    const {currentUser} = useAuth();
+    // const toggleEditForm = () => {
+    //     setToggle(!toggle);
+    // };
     
     return (
         <div className="logout-container">
             <div className="profile-picture">
-                <img src={userLogin} alt="User Picture" />
+                <img src={currentUser.image_url} alt={currentUser.first_name} />
             </div>
-            <h1>Goodbye, {'John Does'}!</h1>
+            <h1>Goodbye, {currentUser.first_name}!</h1>
             <p>We hope to see you again soon!</p>
             <LogoutButton />
         </div>

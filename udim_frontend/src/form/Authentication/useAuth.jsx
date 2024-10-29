@@ -2,8 +2,7 @@ import { useContext } from 'react'
 import { ContextProvider } from '../../apiAndContext/AuthContext'
 
 const useAuth = () => {
-    const { auth, setAuth } = useContext(ContextProvider)
-    return { auth, setAuth }
+    return useContext(ContextProvider);
 }
 
 export default useAuth;
