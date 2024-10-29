@@ -2,8 +2,13 @@
 import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import useRefreshToken from './useRefreshToken';
-import useAuth from './useAuth';
+import {useAuth} from '../../apiAndContext';
 
+/**
+ * Component for persisting user login status.
+ * Manages the refresh of authentication tokens and loading state.
+ * Uses internal organization modules for token refresh and authentication.
+ */
 const PersistLogin = () => {
     const [isLoading, setIsLoading] = useState(true);
     const refresh = useRefreshToken();

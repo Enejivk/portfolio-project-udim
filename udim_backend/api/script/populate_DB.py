@@ -9,14 +9,18 @@ def generate_fake_users(num_users):
     fake = Faker()
     users = []
     for _ in range(num_users):
+        pwd = fake.password()
+        email=fake.email()
         user = User(
             first_name=fake.first_name(),
             last_name=fake.last_name(),
-            email=fake.email(),
-            password=fake.password()
+            email=email,
+            address=fake.address(),
+            password=pwd
         )
         users.append(user)
         db.session.add(user)
+        print(email, pwd)
     db.session.commit()
     return users
 

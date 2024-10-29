@@ -28,13 +28,17 @@ Usage:
     up the API routes for user management.
 """
 
-from flask import request, jsonify
+from flask import request, jsonify, current_app
 from flask_jwt_extended import get_current_user, jwt_required
 from flask_restful import Resource
 from models.models import User, Group
 from api.schema.user import user_schema
 from api.schema.group import group_schema
 from extensions import db
+from datetime import datetime
+import os
+from werkzeug.utils import secure_filename
+
 
 
 class UserList(Resource):
@@ -97,24 +101,62 @@ class UserResource(Resource):
         Returns:
             dict: A dictionary containing the user data.
         """
+        print(user_id)
+        if user_id == 'me':
+            return user_schema.dump(get_current_user())
+
         user = User.query.get_or_404(user_id)
         return {"user": user_schema.dump(user)}
 
     def put(self, user_id):
         """
-        Update a specific user by ID.
+        Update a specific user by ID, including profile image upload.
 
         Parameters:
             user_id (int): The ID of the user to update.
 
         Returns:
             dict: A dictionary containing a success message and the updated
-                  user data.
+                user data.
         """
+        host = "http://localhost:5001"
         user = User.query.get_or_404(user_id)
-        user = user_schema.load(request.json, instance=user, partial=True)
-        db.session.commit()
-        return {"msg": "User updated", "user": user_schema.dump(user)}
+
+        try:
+            # Handle profile image upload
+            if 'image' in request.files:
+                file = request.files['image']
+                if file.filename != '':
+                    allowed_extensions = {'.jpg', '.jpeg', '.png', '.gif'}
+                    file_ext = os.path.splitext(file.filename)[1].lower()
+
+                    if file_ext not in allowed_extensions:
+                        return {'error': 'Invalid file type. Only JPG, JPEG, PNG, and GIF files are allowed.'}, 400
+
+                    # Generate new filename and save file
+                    original_filename = secure_filename(file.filename)
+                    new_filename = f"{user.last_name}_{user.id}_{datetime.now().strftime('%Y%m%d%H%M%S')}{file_ext}"
+                    filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], new_filename)
+                    file.save(filepath)
+
+                    # Update user's profile image URL
+                    user.image_url = f"{host}/static/profile_images/{new_filename}"
+
+            # Handle other user updates from JSON data
+            data = request.form
+            if data:
+                user = user_schema.load(data, instance=user, partial=True)
+
+            # Commit the changes to the database
+            db.session.commit()
+            
+            return {"msg": "User updated", "user": user_schema.dump(user)}
+
+        except Exception as e:
+            db.session.rollback()
+            print('am here', e)
+            return {'error': 'An error occurred while updating the user'}, 500
+
 
     def delete(self, user_id):
         """

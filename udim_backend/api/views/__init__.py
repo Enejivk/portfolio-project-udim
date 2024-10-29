@@ -56,7 +56,7 @@ api = Api(app_view, errors=app_view.errorhandler)
 
 # Registering API endpoints for User, Group, Donation, and Debt resources.
 api.add_resource(UserList, "/users")
-api.add_resource(UserResource, "/users/<int:user_id>")
+api.add_resource(UserResource, "/users/<string:user_id>")
 api.add_resource(GroupList, "/groups")
 api.add_resource(GroupResource, "/groups/<int:group_id>")
 api.add_resource(DonationList, "/donations")
@@ -84,5 +84,4 @@ api.add_resource(
 def handle_marshmallow_error(e):
     return make_response(jsonify({"error": e.messages}), 400)
 
-from api.views.user import *
 from api.views.auth import *

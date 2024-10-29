@@ -6,7 +6,7 @@ import CardBox from './cardBox/CardBox';
 import './Main.css'
 
 const Main = () => {
-    const { handleToggle, istoggleMenu } = useContext(ToggleContext)
+    const { istoggleMenu } = useContext(ToggleContext)
     return (
         <div className={`main ${istoggleMenu ? 'active' : ''}`}>
             <Topbar/>

@@ -3,16 +3,15 @@ import Navigation from "../components/navigation/Navigation";
 import { ContextWrapper } from "../ContextWrapper";
 import { useContext } from "react";
 import { ToggleContext } from "../ContextWrapper";
-import LogoutCart from '../components/logoutCart/LogoutCart'
 import "../components/Main.css"
-
+import GroupsManager from "../components/group/Group";
 
 const MainSection = () => {
     const { istoggleMenu } = useContext(ToggleContext)
     return (
         <div className={`main ${istoggleMenu ? 'active' : ''}`}>
             <Topbar />
-            <LogoutCart />
+            <GroupsManager />
         </div>
     );
 };

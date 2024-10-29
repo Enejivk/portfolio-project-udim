@@ -1,7 +1,7 @@
 import './Header.css'
 import { FiAlignJustify } from "react-icons/fi";
 import { FiX } from "react-icons/fi";
-import useAuth from '../../form/Authentication/useAuth';
+import {useAuth} from '../../apiAndContext';
 import LogoutButton from '../logoutButton/LogoutButton'
 
 import logoBlack from '../../assets/logoBlack.png'
@@ -18,13 +18,11 @@ const Menu = () => (
 )
 
 const SignUp = () => {
-    const { auth, setAuth } = useAuth();
-    {
-        console.log('from header period', auth)
-    }
+    const { status } = useAuth();
+
     return (
         <>
-            {auth.token ? (
+            {status ? (
                 <>
                     <p className='nav-sign-up'>
                         <LogoutButton />

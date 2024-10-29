@@ -17,7 +17,7 @@ Initialize a Flask application with extensions and blueprints.
 import os
 from api.views import app_view, app_auth
 from extensions import db, bcrypt, ma, migrate, cors, jwt
-from flask import Flask, jsonify, make_response
+from flask import Flask, abort, current_app, jsonify, make_response, send_from_directory
 
 app = Flask(__name__)
 app.config.from_object("config")

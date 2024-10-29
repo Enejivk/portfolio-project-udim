@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import useAxiosPrivate from "./useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
 
+/**
+ * Component for displaying a list of groups fetched from the server.
+ * Uses Axios for API requests and React Router for navigation.
+ * Manages component lifecycle to handle asynchronous data fetching and updates.
+ */
 const Group = () => {
     const [groups, setGroups] = useState([]);
     const axiosPrivate = useAxiosPrivate();
@@ -18,7 +23,7 @@ const Group = () => {
                     signal: controller.signal
                 });
                 console.log(response.data);
-                isMounted && setGroups(response.data);
+                isMounted && setGroups(response.data.groups);
             } catch (err) {
                 console.error(err);
                 navigate('/login', { state: { from: location }, replace: true });

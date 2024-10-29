@@ -1,0 +1,27 @@
+/* GroupsManager.css */
+.groups-manager {
+  padding: 20px;
+  max-width: 400px;
+  margin: auto;
+}
+
+.add-group input {
+  margin-right: 10px;
+  padding: 5px;
+}
+
+.group-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.group-list li {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.group-list button {
+  margin-left: 5px;
+}

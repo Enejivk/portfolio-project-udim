@@ -9,7 +9,7 @@ import { GiMoneyStack } from "react-icons/gi";
 import { FiAlignJustify } from "react-icons/fi";
 import { IoCloseSharp } from "react-icons/io5";
 
-const userLogin = "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+const userLogin = "http://127.0.0.1:5001/static/profile_images/skywalker_3_20241015173822.jpg"
 const debtors = [
     {
         profile_picture: "https://randomuser.me/api/portraits/men/1.jpg",

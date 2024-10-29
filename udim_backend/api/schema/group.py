@@ -22,6 +22,8 @@ from marshmallow import validate, validates_schema, ValidationError
 from marshmallow.fields import String
 from extensions import ma
 from models.models import Group
+from api.schema.donation import DonationSchema
+from api.schema.debt import DebtSchema
 from api.schema.payment import PaymentSchema
 from api.schema.user import UserSchema
 
@@ -45,9 +47,10 @@ class GroupSchema(ma.SQLAlchemyAutoSchema):
                       "invalid": "The group name is invalid and needs to be a \
 string",
     })
-    # payments = ma.Nested(PaymentSchema, many=True)
-    # members = ma.Nested(UserSchema, many=True)
-
+    payments = ma.Nested(PaymentSchema, many=True)
+    members = ma.Nested(UserSchema, many=True)
+    donations = ma.Nested(DonationSchema, many=True)
+    debts = ma.Nested(DebtSchema, many=True)
     @validates_schema
     def validate_name(self, data, **kwargs):
         """

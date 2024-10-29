@@ -1,4 +1,3 @@
-
 import './Details.css'
 
 const RecentOrders = () => {

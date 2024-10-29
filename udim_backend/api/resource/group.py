@@ -32,7 +32,7 @@ Usage:
 
 from extensions import db
 from models.models import Group
-from api.schema.group import group_schema
+from api.schema.group import GroupSchema, group_schema
 from api.schema.user import user_schema
 from flask import request
 from flask_jwt_extended import get_current_user, jwt_required
@@ -72,8 +72,9 @@ class GroupList(Resource):
                   group data.
         """
         user = get_current_user()
-        group = group_schema.load(request.json)
-        group.user_id = user.id
+        data = request.json
+        data.update({'user_id': user.id})
+        group = group_schema.load(data)
         group.members.append(user)
         group.admins.append(user)
         db.session.add(group)
