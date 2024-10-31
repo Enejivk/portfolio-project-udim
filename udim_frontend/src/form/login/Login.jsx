@@ -14,8 +14,7 @@ import '../Form.css';
 
 
 const LoginForm = () => {
-    const { auth, setAuth } = useAuth()
-
+    const { setAuth, setCurrentUser } = useAuth()
     const location = useLocation()
     const navigate = useNavigate()
     const from = location.state?.from?.pathname || '/home'
@@ -43,18 +42,24 @@ const LoginForm = () => {
         try {
             await validationSchema.validate(formData, { abortEarly: false });
 
-            const response = await axios.post('/auth/login',
+            let response = await axios.post('/auth/login',
                 JSON.stringify(formData),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
                 }
-            )
+            );
 
             const refresh_token = response.data?.refresh_token;
             const token = response.data?.access_token;
             setAuth({ token, refresh_token });
-            navigate(from, { replace: true });
+            response = await axios.get('/api/users/me',
+                {
+                    headers: { 'Authorization': `Bearer ${token}` },
+                }
+            );
+            setCurrentUser(response?.data);
+            navigate('/home', { replace: true });
             setErrors({});
 
 

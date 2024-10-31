@@ -30,5 +30,6 @@ class DebtSchema(ma.SQLAlchemyAutoSchema):
         """
         model = Debt
         load_instance = True
-        exclude = ["id"]
-        include_relationships = True
+        include_fk = True
+        # include_relationships = True
+

@@ -10,13 +10,22 @@ const AuthContext = ({ children }) => {
     return storedAuth ? JSON.parse(storedAuth) : {};
   });
 
+  const [currentUser, setCurrentUser] = useState(() => {
+    const storedUser = localStorage.getItem('user');
+    return storedUser ? JSON.parse(storedUser) : {};
+  });
+
   // Update local storage whenever auth state changes
   useEffect(() => {
     localStorage.setItem('auth', JSON.stringify(auth));
   }, [auth]);
 
+  useEffect(() => {
+    localStorage.setItem('user', JSON.stringify(currentUser));
+  }, [currentUser]);
+
   return (
-    <ContextProvider.Provider value={{ auth, setAuth }}>
+    <ContextProvider.Provider value={{ auth, setAuth, currentUser, setCurrentUser }}>
       {children}
     </ContextProvider.Provider>
   );

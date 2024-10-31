@@ -1,20 +1,23 @@
 #!/usr/bin/python3
 from faker import Faker
 from extensions import db
-from models.models import User, Group, Donation, Debt, Contribution
+from models.models import User, Group, Donation, Debt, Payment
 
 fake = Faker()
 
 def create_fake_user():
+    pwd = fake.password()
+    email = fake.email()
     user = User(
         first_name=fake.first_name(),
         last_name=fake.last_name(),
-        email=fake.email(),
-        password=fake.password(),
-        profile_image='default.jpg'
+        email=email,
+        password=pwd,
+        address=fake.address(),
     )
     db.session.add(user)
     db.session.commit()
+    print(email, pwd)
     return user
 
 def create_fake_group(admin_user, members):
@@ -54,25 +57,26 @@ def create_fake_debt(group_id, user_id):
     db.session.commit()
     return debt
 
-def create_fake_contribution(group_id, user_id, donation_id):
-    contribution = Contribution(
+def create_fake_payment(group_id, user_id, donation_id):
+    payment = Payment(
         amount=fake.random_number(digits=5),
         description=fake.text(),
         group_id=group_id,
         user_id=user_id,
         donation_id=donation_id
     )
-    db.session.add(contribution)
+    db.session.add(payment)
     db.session.commit()
-    return contribution
+    return payment
 
 def create_fk1():
+
     # Create fake admin user
     admin_user = create_fake_user()
 
     # Create additional fake users to be members of the group
     members = [admin_user]  # Start with the admin user as a member
-    for _ in range(5):
+    for _ in range(8):
         member_user = create_fake_user()
         members.append(member_user)
 
@@ -83,12 +87,12 @@ def create_fk1():
     for member in members:
         donation = create_fake_donation(group.id, member.id)
         debt = create_fake_debt(group.id, member.id)
-        create_fake_contribution(group.id, member.id, donation.id)
+        create_fake_payment(group.id, member.id, donation.id)
 
     print("Fake data generated successfully.")
     
 if __name__ == "__main__":
-    from udim_backend.app import app
+    from app import app
     with app.app_context():  # Ensure you are working within the app context
         for i in range(5):
             create_fk1()
