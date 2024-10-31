@@ -23,6 +23,7 @@ const navNameAndIcon = [
     { name: 'PROFILE', icon: MdPermIdentity, link: '/profile' },
     { name: 'FINANCE', icon: FaMoneyBillTrendUp, link: "/finances" },
     { name: 'DEBTORS', icon: TbZoomMoneyFilled, link: '/debtors' },
+    { name: 'GROUPS', icon: GrGroup, link: '/groups' },
     // { name: 'NOTIFICATION', icon: IoMdNotifications },
     { name: 'LOGOUT', icon: IoMdLogOut, link: '/Logout' },
 ]

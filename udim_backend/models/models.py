@@ -12,7 +12,7 @@ class User(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     first_name = db.Column(db.String(60), nullable=False)
     last_name = db.Column(db.String(60), nullable=False)
-    image_url = db.Column(db.String(20), nullable=True)
+    image_url = db.Column(db.String(60), nullable=False, default='http://localhost:5001/static/profile_images/avatar.jpeg')
     password = db.Column(db.String(60), nullable=False)
     email = db.Column(db.String(60), nullable=False, unique=True)
     phone = db.Column(db.String(15), nullable=True)

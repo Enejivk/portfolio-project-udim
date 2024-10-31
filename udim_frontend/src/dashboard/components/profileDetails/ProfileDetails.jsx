@@ -6,19 +6,14 @@ import useAxiosPrivate from '../../../form/Authentication/useAxiosPrivate'
 import { useNavigate, useLocation } from 'react-router-dom';
 
 
-const EditProfile = () => {
+const EditProfile = ({setToggleEditForm}) => {
   const {currentUser, setCurrentUser} = useAuth();
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || '/home';
+  const from = location.state?.from?.pathname || '/profile';
   const [file, setFile] = useState(null);
-  const [formData, setFormData] = useState({
-    name: currentUser.name,
-    email: currentUser.email,
-    phone: currentUser.phone,
-    address: currentUser.address,
-  });
+  const [formData, setFormData] = useState({});
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -55,6 +50,7 @@ const EditProfile = () => {
 
       const updatedUser =  response.data.user;
       setCurrentUser(updatedUser);
+      setToggleEditForm(false);
       navigate(from, { replace: true });
       // console.log('Form submitted with data:', formData);
     } catch (error) {
@@ -90,7 +86,7 @@ const EditProfile = () => {
         type="email"
         name="email"
         placeholder="Email"
-        value={currentUser.email}
+        value={formData.email || currentUser.email}
         disabled
       />
       <input
@@ -135,7 +131,7 @@ const ProfileDetails = () => {
           Edit Profile
         </button>
       </div>
-      {toggleEditForm && <EditProfile value={setToggleEditForm}/>}
+      {toggleEditForm && <EditProfile setToggleEditForm={setToggleEditForm}/>}
     </div>
   );
 };
